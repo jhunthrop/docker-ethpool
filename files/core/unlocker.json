@@ -1,0 +1,33 @@
+{
+  "coin": "PIRL",
+  "upstream": [
+    {
+      "name": "main",
+      "url": "http://pirl-node:6588",
+      "timeout": "10s"
+    },
+    {
+      "name": "backup",
+      "url": "http://pirl-node:6588",
+      "timeout": "10s"
+    }
+  ],
+  "redis": {
+    "endpoint": "redis:6379",
+    "poolSize": 10,
+    "database": 0,
+    "password": ""
+  },
+  "unlocker": {
+    "enabled": true,
+    "poolFee": 0.5,
+    "poolFeeAddress": "0x1dF45A25b95dE69e0E42338EBa7C00A83cFa81fc",
+    "donate": false,
+    "depth": 120,
+    "immatureDepth": 20,
+    "keepTxFees": true,
+    "interval": "10m",
+    "daemon": "http://pirl-node:8545",
+    "timeout": "10s"
+  }
+}

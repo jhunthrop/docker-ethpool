@@ -1,0 +1,79 @@
+---
+version: '3.5'
+
+services:
+
+  miner:
+    command: /miner.json
+    image: "jhova/pirlpool-core:${TAG}"
+    links:
+      - pirl-node:pirl-node
+      - redis:redis
+    volumes:
+      - ./files/core/miner.json:/miner.json
+
+  api:
+    build:
+      context: .
+      target: base
+    image: "jhova/pirlpool-core:${TAG}"
+    command: /api.json
+    links:
+      - pirl-node:pirl-node
+      - redis:redis
+    volumes:
+      - ./files/core/api.json:/api.json
+    #...
+
+  payouts:
+    command: /payouts.json
+    image: "jhova/pirlpool-core:${TAG}"
+    links:
+      - pirl-node:pirl-node
+      - redis:redis
+    volumes:
+      - ./files/core/payouts.json:/payouts.json
+
+  unlocker:
+    command: /unlocker.json
+    image: "jhova/pirlpool-core:${TAG}"
+    links:
+      - pirl-node:pirl-node
+      - redis:redis
+    volumes:
+      - ./files/core/unlocker.json:/unlocker.json
+
+  web:
+    command: nginx
+    build:
+      context: .
+      target: web
+    image: "jhova/pirlpool-web:${TAG}"
+    links:
+      - api:api
+    volumes:
+      - ./files/nginx/web.conf:/etc/nginx/sites-available/default:ro
+      - ./files/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8088:8088"
+      - "8008:8008"
+      - "8080:8080"
+      - "8009:80"
+    #...
+
+  redis:
+    image: redis
+    #...
+
+
+  pirl-node:
+    build:
+      context: .
+      target: pirl-node
+    image: "jhova/pirl-node:${TAG}"
+    command: "--etherbase ${WALLET}"
+    #...
+
+  certbot:
+    image: certbot/certbot
+    #...

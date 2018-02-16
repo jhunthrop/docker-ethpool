@@ -1,0 +1,34 @@
+{
+  "coin": "PIRL",
+  "upstream": [
+    {
+      "name": "main",
+      "url": "http://pirl-node:6588",
+      "timeout": "10s"
+    },
+    {
+      "name": "backup",
+      "url": "http://pirl-node:6588",
+      "timeout": "10s"
+    }
+  ],
+  "redis": {
+    "endpoint": "redis:6379",
+    "poolSize": 10,
+    "database": 0,
+    "password": ""
+  },
+  "payouts": {
+    "enabled": true,
+    "requirePeers": 25,
+    "interval": "10m",
+    "daemon": "pirl-node:8545",
+    "timeout": "10s",
+    "address": "0x1dF45A25b95dE69e0E42338EBa7C00A83cFa81fc",
+    "gas": "21000",
+    "gasPrice": "50000000000",
+    "autoGas": true,
+    "threshold": 500000000,
+    "bgsave": false
+  }
+}

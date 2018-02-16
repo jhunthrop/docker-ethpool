@@ -1,0 +1,37 @@
+{
+	"coin": "PIRL",
+
+	"api": {
+		"enabled": true,
+		"purgeOnly": false,
+		"purgeInterval": "10m",
+		"listen": "0.0.0.0:8080",
+		"statsCollectInterval": "5s",
+		"hashrateWindow": "30m",
+		"hashrateLargeWindow": "3h",
+		"luckWindow": [64, 128, 256],
+		"payments": 50,
+		"blocks": 50
+	},
+
+	"upstreamCheckInterval": "5s",
+	"upstream": [
+		{
+			"name": "main",
+			"url": "http://pirl-node:6588",
+			"timeout": "10s"
+		},
+		{
+			"name": "backup",
+			"url": "http://pirl-node:6588",
+			"timeout": "10s"
+		}
+	],
+
+	"redis": {
+		"endpoint": "redis:6379",
+		"poolSize": 10,
+		"database": 0,
+		"password": ""
+	}
+}
